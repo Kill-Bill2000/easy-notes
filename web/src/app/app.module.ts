@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { NoteCardComponent } from './note-card/note-card.component';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [AppComponent, CategoryListComponent, NoteCardComponent],
@@ -21,6 +22,7 @@ import { NoteCardComponent } from './note-card/note-card.component';
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

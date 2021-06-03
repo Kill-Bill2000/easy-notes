@@ -5,6 +5,20 @@
         </div>
     </div>
     <span class="category-spacer"></span>
-    <button mat-flat-button color="accent" class="button add-button">Add category</button>
+    <div *ngIf="addButtonShown">
+        <button mat-flat-button color="accent" class="button add-button" (click)="showField()">
+            Add category
+        </button>
+    </div>
+    <div *ngIf="fieldShown" class="add-category">
+        <mat-form-field appearance="outline" class="name-field">
+            <mat-label>Category Name</mat-label>
+            <input matInput placeholder="Enter a category name" #categoryName>
+        </mat-form-field>
+        <button mat-button color="accent" aria-label="Add field button" class="add-field-button"
+            (click)="addCategory(categoryName.value)">
+            <mat-icon>check</mat-icon>
+        </button>
+    </div>
 
 </div>

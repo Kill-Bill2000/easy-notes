@@ -9,10 +9,6 @@
   height: 42px;
 }
 
-.add-button {
-  align-self: baseline;
-}
-
 .category {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -20,4 +16,15 @@
 
 .category-spacer {
   flex: 1 1 auto;
+}
+
+.add-field-button {
+  height: 54px;
+}
+
+.add-category {
+  align-self: baseline;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
