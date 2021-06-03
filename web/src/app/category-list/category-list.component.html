@@ -1,1 +1,10 @@
-<p>category-list works!</p>
+<div class="container">
+    <div class="category-container">
+        <div *ngFor="let cat of categories" class="category">
+            <button mat-stroked-button class="button">{{cat.title}}</button>
+        </div>
+    </div>
+    <span class="category-spacer"></span>
+    <button mat-flat-button color="accent" class="button add-button">Add category</button>
+
+</div>

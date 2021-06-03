@@ -1,0 +1,23 @@
+.container {
+  height: 99%;
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  width: 100%;
+  height: 42px;
+}
+
+.add-button {
+  align-self: baseline;
+}
+
+.category {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.category-spacer {
+  flex: 1 1 auto;
+}

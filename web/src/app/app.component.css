@@ -15,5 +15,6 @@
 }
 
 .drawer {
-  padding: 4%;
+  padding: 20px;
+  min-width: 20%;
 }
