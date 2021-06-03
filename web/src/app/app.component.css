@@ -1,0 +1,19 @@
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.drawer-container {
+  padding-top: 10px;
+  min-height: calc(100vh - 64px);
+}
+
+.sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer {
+  padding: 4%;
+}
