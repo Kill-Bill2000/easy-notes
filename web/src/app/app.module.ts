@@ -11,6 +11,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { NoteCardComponent } from './note-card/note-card.component';
 import { MatInputModule } from '@angular/material/input';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [AppComponent, CategoryListComponent, NoteCardComponent],
@@ -24,7 +25,7 @@ import { MatInputModule } from '@angular/material/input';
     MatSidenavModule,
     MatInputModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
