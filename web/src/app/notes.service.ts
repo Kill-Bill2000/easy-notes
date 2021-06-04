@@ -42,4 +42,24 @@ export class NotesService {
       new Note('Note3C', cat3),
     ]);
   }
+
+  getNotesOfCategory(cat: Category): Observable<Note[]> {
+    switch (cat.title) {
+      case 'Category1':
+        return of([new Note('Note1A', cat)]);
+
+      case 'Category2':
+        return of([new Note('Note2A', cat), new Note('Note2B', cat)]);
+
+      case 'Category3':
+        return of([
+          new Note('Note3A', cat),
+          new Note('Note3B', cat),
+          new Note('Note3C', cat),
+        ]);
+
+      default:
+        return null;
+    }
+  }
 }

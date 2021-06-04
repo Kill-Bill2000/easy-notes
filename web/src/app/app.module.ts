@@ -12,6 +12,10 @@ import { CategoryListComponent } from './category-list/category-list.component';
 import { NoteCardComponent } from './note-card/note-card.component';
 import { MatInputModule } from '@angular/material/input';
 import { CookieService } from 'ngx-cookie-service';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, CategoryListComponent, NoteCardComponent],
@@ -24,6 +28,10 @@ import { CookieService } from 'ngx-cookie-service';
     MatButtonModule,
     MatSidenavModule,
     MatInputModule,
+    MatCardModule,
+    MatDividerModule,
+    MatCheckboxModule,
+    FormsModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

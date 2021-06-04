@@ -12,9 +12,16 @@
   height: 100%;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .drawer {
   padding: 20px;
   min-width: 20%;
+}
+
+.notes {
+  width: 90%;
+  display: flex;
+  justify-content: center;
 }

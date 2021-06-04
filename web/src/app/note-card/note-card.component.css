@@ -1,0 +1,39 @@
+.card {
+  width: 95%;
+  min-height: 85vh;
+}
+
+.card-title {
+  font-size: xx-large;
+}
+
+.card-header {
+  margin-bottom: 30px;
+}
+
+.card-note {
+  font-size: large;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
+.card-divider {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.checked-note {
+  text-decoration: line-through;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card-content-container {
+  display: flex;
+  flex-direction: column;
+}
