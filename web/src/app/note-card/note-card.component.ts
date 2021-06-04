@@ -12,6 +12,8 @@ import { CookiesService } from '../cookies.service';
 export class NoteCardComponent implements OnInit {
   category: Category;
   notes: Note[];
+  fieldShown = false;
+  addButtonShown = true;
 
   constructor(
     private notesService: NotesService,
@@ -29,5 +31,31 @@ export class NoteCardComponent implements OnInit {
     this.notesService
       .getNotesOfCategory(this.category)
       .subscribe((notes) => (this.notes = notes));
+  }
+
+  private toggleField(fieldVisible: boolean) {
+    if (fieldVisible) {
+      this.fieldShown = true;
+      this.addButtonShown = false;
+    } else {
+      this.fieldShown = false;
+      this.addButtonShown = true;
+    }
+  }
+
+  public showField() {
+    this.toggleField(true);
+  }
+
+  public addNote(note: string) {
+    this.notesService.saveNote(new Note(note, this.category));
+    console.log(note);
+    this.toggleField(false);
+    this.refreshNotes();
+  }
+
+  public deleteNote(note: Note) {
+    this.notesService.deleteNote(note);
+    this.refreshNotes();
   }
 }

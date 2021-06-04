@@ -16,11 +16,29 @@
                         <p class="card-note checked-note">{{note.description}}</p>
                     </ng-template>
                 </mat-checkbox>
-                <button mat-icon-button aria-label="Edit" color="accent">
-                    <mat-icon>edit</mat-icon>
+                <button mat-icon-button aria-label="Edit" color="accent" (click)="deleteNote(note)">
+                    <mat-icon>delete</mat-icon>
                 </button>
             </div>
             <mat-divider [inset]="true" *ngIf="i < notes.length-1" class="card-divider"></mat-divider>
+        </div>
+        <div class="add-note">
+            <div *ngIf="addButtonShown">
+                <button mat-flat-button color="accent" class="button add-button" (click)="showField()">
+                    <mat-icon>add</mat-icon>
+                    Add note
+                </button>
+            </div>
+            <div *ngIf="fieldShown" class="add-note">
+                <mat-form-field appearance="outline" class="name-field">
+                    <mat-label>Note</mat-label>
+                    <input matInput placeholder="Enter your note" #note>
+                </mat-form-field>
+                <button mat-button color="accent" aria-label="Add field button" class="add-field-button"
+                    (click)="addNote(note.value)">
+                    <mat-icon>check</mat-icon>
+                </button>
+            </div>
         </div>
 
     </mat-card-content>

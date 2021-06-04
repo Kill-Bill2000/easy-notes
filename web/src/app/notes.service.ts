@@ -9,11 +9,11 @@ import { Note } from './helpers/Note';
 export class NotesService {
   constructor() {}
 
-  saveCategory(cat: Category): Observable<boolean> {
+  public saveCategory(cat: Category): Observable<boolean> {
     return of(true);
   }
 
-  getCategories(): Observable<Category[]> {
+  public getCategories(): Observable<Category[]> {
     return of([
       new Category('Category1'),
       new Category('Category2'),
@@ -21,29 +21,11 @@ export class NotesService {
     ]);
   }
 
-  saveNote(note: Note): Observable<boolean> {
+  public saveNote(note: Note): Observable<boolean> {
     return of(true);
   }
 
-  getNotes(): Observable<Note[]> {
-    let cat1 = new Category('Category1');
-    cat1.id = 1;
-    let cat2 = new Category('Category2');
-    cat2.id = 2;
-    let cat3 = new Category('Category3');
-    cat3.id = 3;
-
-    return of([
-      new Note('Note1A', cat1),
-      new Note('Note2A', cat2),
-      new Note('Note2B', cat2),
-      new Note('Note3A', cat3),
-      new Note('Note3B', cat3),
-      new Note('Note3C', cat3),
-    ]);
-  }
-
-  getNotesOfCategory(cat: Category): Observable<Note[]> {
+  public getNotesOfCategory(cat: Category): Observable<Note[]> {
     switch (cat.title) {
       case 'Category1':
         return of([new Note('Note1A', cat)]);
@@ -61,5 +43,9 @@ export class NotesService {
       default:
         return null;
     }
+  }
+
+  public deleteNote(note: Note): Observable<boolean> {
+    return of(true);
   }
 }
