@@ -43,8 +43,4 @@ export class CategoryListComponent implements OnInit {
     console.log(categoryName);
     this.toggleField(false);
   }
-
-  public setCategory(cat: Category) {
-    this.cookiesService.setCategoryCookie(cat);
-  }
 }

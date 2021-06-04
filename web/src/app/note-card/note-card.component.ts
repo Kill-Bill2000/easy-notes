@@ -3,6 +3,7 @@ import { Category } from '../helpers/Category';
 import { Note } from '../helpers/Note';
 import { NotesService } from '../notes.service';
 import { CookiesService } from '../cookies.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-note-card',
@@ -14,20 +15,26 @@ export class NoteCardComponent implements OnInit {
   notes: Note[];
   fieldShown = false;
   addButtonShown = true;
+  id: number;
 
   constructor(
     private notesService: NotesService,
-    private cookiesService: CookiesService
-  ) {}
-
-  ngOnInit(): void {
-    this.refreshNotes();
+    private route: ActivatedRoute
+  ) {
+    route.params.subscribe((val) => {
+      this.route.paramMap.subscribe((params) => {
+        this.id = +params.get('id');
+      });
+      this.refreshNotes();
+    });
   }
 
+  ngOnInit(): void {}
+
   public refreshNotes() {
-    this.cookiesService
-      .getCategoryCookie()
-      .subscribe((category) => (this.category = category));
+    this.notesService
+      .getCategoryFromId(this.id)
+      .subscribe((cat) => (this.category = cat));
     this.notesService
       .getNotesOfCategory(this.category)
       .subscribe((notes) => (this.notes = notes));

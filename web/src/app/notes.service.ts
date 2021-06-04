@@ -14,11 +14,38 @@ export class NotesService {
   }
 
   public getCategories(): Observable<Category[]> {
-    return of([
-      new Category('Category1'),
-      new Category('Category2'),
-      new Category('Category3'),
-    ]);
+    let cats = new Array<Category>();
+    let cat1 = new Category('Category1');
+    cat1.id = 1;
+    cats.push(cat1);
+    let cat2 = new Category('Category2');
+    cat2.id = 2;
+    cats.push(cat2);
+    let cat3 = new Category('Category33');
+    cat3.id = 33;
+    cats.push(cat3);
+
+    return of(cats);
+  }
+
+  public getCategoryFromId(id: number): Observable<Category> {
+    let cat: Category;
+    switch (id) {
+      case 1:
+        cat = new Category('Category1');
+        cat.id = 1;
+        return of(cat);
+      case 2:
+        cat = new Category('Category2');
+        cat.id = 2;
+        return of(cat);
+      case 33:
+        cat = new Category('Category33');
+        cat.id = 33;
+        return of(cat);
+      default:
+        return null;
+    }
   }
 
   public saveNote(note: Note): Observable<boolean> {
@@ -33,7 +60,7 @@ export class NotesService {
       case 'Category2':
         return of([new Note('Note2A', cat), new Note('Note2B', cat)]);
 
-      case 'Category3':
+      case 'Category33':
         return of([
           new Note('Note3A', cat),
           new Note('Note3B', cat),
