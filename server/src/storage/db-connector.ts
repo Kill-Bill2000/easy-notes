@@ -1,20 +1,33 @@
 import mongoose from "mongoose";
+import { IDbConnector } from "./db-connector-interface";
+import { UserInterface } from "./interface/user-interface";
 import { UserModel } from "./model/user-model";
 
-export class DbConnector {
+const port = 27017;
+
+export class DbConnector implements IDbConnector {
 	async connect() {
-		await mongoose.connect("mongodb://localhost:27017/easy-notes", {
+		await mongoose.connect(`mongodb://localhost:${port}/easy-notes`, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 		});
 		const db = mongoose.connection;
 		db.on("error", console.error.bind(console, "connection error:"));
-		db.once("open", function () {
-			console.log("Connected to DB");
-		});
+		console.log(`Connected to DB on Port ${port}!`);
 	}
 
-	async getUsers(): Promise<void> {
-		//Do request here
+	async saveUser(user: UserInterface): Promise<boolean> {
+		const userDoc = new UserModel({
+			username: user.username,
+			password: user.password,
+		});
+
+		await userDoc.save();
+
+		return userDoc.username.length > 0;
+	}
+
+	async getUserById(userId: number): Promise<UserInterface> {
+		throw new Error("Method not implemented.");
 	}
 }
