@@ -1,5 +1,5 @@
 import express from "express";
-import { DbConnector } from "./src/storage/dbconnector";
+import { DbConnector } from "./src/storage/db-connector";
 const app = express();
 const port = 8000;
 
