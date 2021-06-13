@@ -6,7 +6,7 @@ export const userSchema = new mongoose.Schema<UserInterface>({
 	user_id: {
 		type: mongoose.Types.ObjectId,
 	},
-	username: { type: String, required: true },
+	username: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
 	categories: [categorySchema],
 });

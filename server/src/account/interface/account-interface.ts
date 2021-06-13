@@ -1,6 +1,6 @@
 import { UserInterface } from "./user-interface";
 
 export interface IAccount {
-	saveUser(user: UserInterface): boolean;
-	getUserById(userId: number): UserInterface;
+	saveUser(user: UserInterface): Promise<boolean>;
+	getUserById(userId: number): Promise<UserInterface>;
 }

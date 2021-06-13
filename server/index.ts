@@ -1,7 +1,7 @@
 import express from "express";
 import * as http from "http";
 import cors from "cors";
-import { AccountRoutesConfig } from "./src/account/account.routes.config";
+import { AccountRoutesConfig } from "./src/account/routes/account.routes.config";
 import winston from "winston";
 import expressWinston from "express-winston";
 import debug from "debug";
@@ -41,17 +41,15 @@ app.get("/", (req: express.Request, res: express.Response) => {
 	res.status(200).send(runningMessage);
 });
 
-mongoose.connect(
-	`mongoose://localhost:${portDB}/easy-notes`,
-	{
+mongoose
+	.connect(`mongodb://localhost:${portDB}/easy-notes`, {
 		useCreateIndex: true,
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
-	},
-	() => {
-		console.log(`Connected to DB at port ${portDB}`);
-	}
-);
+	})
+	.then(() => console.log(`Connected to DB at port ${portDB}`));
+
+const con = mongoose.connection;
 
 server.listen(port, () => {
 	routes.forEach((route: CommonRoutesConfig) => {
