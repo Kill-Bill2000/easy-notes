@@ -1,8 +1,6 @@
-import { UserInterface } from "../interface/user-interface";
-import { IAccount } from "../interface/account-interface";
-import { NextFunction, Request, Response } from "express";
 import { UserModel } from "../model/user-model";
 import mongoose from "mongoose";
+import { Request, Response } from "express";
 
 const saveUser = (req: Request, res: Response) => {
 	const { username, password } = req.body.user;

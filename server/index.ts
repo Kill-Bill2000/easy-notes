@@ -7,6 +7,7 @@ import expressWinston from "express-winston";
 import debug from "debug";
 import { CommonRoutesConfig } from "./src/common/common.routes.config";
 import mongoose from "mongoose";
+import { CategoryRoutesConfig } from "./src/category/routes/category.routes.config";
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
@@ -34,6 +35,7 @@ if (!process.env.DEBUG) {
 app.use(expressWinston.logger(loggerOptions));
 
 routes.push(new AccountRoutesConfig(app));
+routes.push(new CategoryRoutesConfig(app));
 
 const runningMessage = `Server running at http://localhost:${port}`;
 
