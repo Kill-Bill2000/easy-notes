@@ -1,4 +1,4 @@
-import { UserInterface } from "../../storage/interface/user-interface";
+import { UserInterface } from "../interface/user-interface";
 import { IAccount } from "../interface/account-interface";
 
 export class Account implements IAccount {

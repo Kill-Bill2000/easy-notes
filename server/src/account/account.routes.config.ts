@@ -1,5 +1,9 @@
 import express from "express";
 import { CommonRoutesConfig } from "../common/common.routes.config";
+import { IAccount } from "./interface/account-interface";
+import { Account } from "./model/account";
+import { User } from "./model/user";
+
 export class AccountRoutesConfig extends CommonRoutesConfig {
 	constructor(app: express.Application) {
 		super(app, "UsersRoutes");
@@ -7,12 +11,11 @@ export class AccountRoutesConfig extends CommonRoutesConfig {
 
 	configureRoutes() {
 		this.app
-			.route(`/hello`)
-			.get((req: express.Request, res: express.Response) => {
-				res.status(200).send(`hello`);
-			})
+			.route(`/account`)
 			.post((req: express.Request, res: express.Response) => {
-				res.status(200).send(req.body.name);
+				const account: IAccount = new Account();
+				const user: User = req.body.user;
+				account.saveUser(user);
 			});
 
 		return this.app;

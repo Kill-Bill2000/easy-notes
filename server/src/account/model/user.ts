@@ -1,5 +1,5 @@
-import { UserInterface } from "../../storage/interface/user-interface";
-import { CategoryInterface } from "../../storage/interface/category-interface";
+import { UserInterface } from "../interface/user-interface";
+import { CategoryInterface } from "../../category/interface/category-interface";
 
 export class User implements UserInterface {
 	userId: number;

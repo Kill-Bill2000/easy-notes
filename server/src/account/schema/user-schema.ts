@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { categorySchema } from "./category-schema";
+import { categorySchema } from "../../category/schema/category-schema";
 import { UserInterface } from "../interface/user-interface";
 
 export const userSchema = new mongoose.Schema<UserInterface>({

@@ -1,4 +1,4 @@
-import { NoteInterface } from "./note-interface";
+import { NoteInterface } from "../../note/interface/note-interface";
 export interface CategoryInterface {
 	categoryId: number;
 	title: string;

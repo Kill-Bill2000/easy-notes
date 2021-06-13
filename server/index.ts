@@ -6,10 +6,12 @@ import winston from "winston";
 import expressWinston from "express-winston";
 import debug from "debug";
 import { CommonRoutesConfig } from "./src/common/common.routes.config";
+import mongoose from "mongoose";
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 const port = 8000;
+const portDB = 27017;
 const routes: CommonRoutesConfig[] = [];
 const debugLog: debug.IDebugger = debug("app");
 
@@ -38,6 +40,18 @@ const runningMessage = `Server running at http://localhost:${port}`;
 app.get("/", (req: express.Request, res: express.Response) => {
 	res.status(200).send(runningMessage);
 });
+
+mongoose.connect(
+	`mongoose://localhost:${portDB}/easy-notes`,
+	{
+		useCreateIndex: true,
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	},
+	() => {
+		console.log(`Connected to DB at port ${portDB}`);
+	}
+);
 
 server.listen(port, () => {
 	routes.forEach((route: CommonRoutesConfig) => {

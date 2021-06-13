@@ -1,4 +1,4 @@
-import { UserInterface } from "../../storage/interface/user-interface";
+import { UserInterface } from "./user-interface";
 
 export interface IAccount {
 	saveUser(user: UserInterface): boolean;
