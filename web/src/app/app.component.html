@@ -5,9 +5,13 @@
   </button>
   <span>Easy Notes</span>
   <span class="toolbar-spacer"></span>
-  <button mat-icon-button class="icon" aria-label="Account">
+  <button mat-icon-button class="icon" aria-label="Account" [matMenuTriggerFor]="account_menu">
     <mat-icon>account_circle</mat-icon>
   </button>
+  <mat-menu #account_menu="matMenu">
+    <a mat-menu-item [routerLink]="['/login']">Login</a>
+    <a mat-menu-item [routerLink]="['/register']">Register</a>
+  </mat-menu>
 </mat-toolbar>
 
 <mat-drawer-container class="drawer-container" autosize>
@@ -16,7 +20,6 @@
   </mat-drawer>
   <div class="sidenav-content">
     <router-outlet></router-outlet>
-    <!-- <app-note-card class="notes"></app-note-card> -->
   </div>
 
 </mat-drawer-container>

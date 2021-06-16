@@ -16,9 +16,20 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { AccountComponent } from './account/account.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { RegisterComponent } from './account/register/register.component';
+import { LoginComponent } from './account/login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, CategoryListComponent, NoteCardComponent],
+  declarations: [
+    AppComponent,
+    CategoryListComponent,
+    NoteCardComponent,
+    AccountComponent,
+    RegisterComponent,
+    LoginComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,6 +43,7 @@ import { FormsModule } from '@angular/forms';
     MatDividerModule,
     MatCheckboxModule,
     FormsModule,
+    MatMenuModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
