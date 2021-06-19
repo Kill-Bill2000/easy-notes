@@ -1,9 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from './interfaces/user';
-import { ConfigService } from '../../service/config/config.service';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ConfigService } from 'src/app/common/service/config/config.service';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +32,6 @@ export class AccountService {
     return throwError('Something bad happened; please try again later.');
   }
 
-  //TODO implement
   async login(user: User): Promise<boolean> {
     let url: string = this.SERVER_URL + '/account';
     let loggedInUser: boolean = false;

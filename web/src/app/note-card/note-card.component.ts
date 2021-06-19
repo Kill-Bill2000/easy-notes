@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../helpers/Category';
 import { Note } from '../helpers/Note';
-import { CookiesService } from '../service/cookies.service';
 import { ActivatedRoute } from '@angular/router';
-import { NotesService } from '../service/notes.service';
+import { NotesService } from '../service/notes/notes.service';
 
 @Component({
   selector: 'app-note-card',
