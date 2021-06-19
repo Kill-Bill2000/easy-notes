@@ -10,8 +10,8 @@ export class AccountRoutesConfig extends CommonRoutesConfig {
 	configureRoutes() {
 		this.app
 			.route(`/account`)
-			.get((req: express.Request, res: express.Response) => {
-				account.getUserByUsername(req, res);
+			.post((req: express.Request, res: express.Response) => {
+				account.checkUser(req, res);
 			})
 			.post((req: express.Request, res: express.Response) => {
 				account.saveUser(req, res);
