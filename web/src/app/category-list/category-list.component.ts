@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CookiesService } from '../common/service/cookies/cookies.service';
 import { Category } from '../helpers/Category';
-import { CookiesService } from '../service/cookies/cookies.service';
-import { NotesService } from '../service/notes/notes.service';
+import { NotesService } from '../note-card/service/notes.service';
 
 @Component({
   selector: 'app-category-list',
