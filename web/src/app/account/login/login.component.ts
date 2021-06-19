@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { AccountService } from '../service/account.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from '../service/interfaces/user';
+import { UserHttpObj } from '../service/model/user';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +12,53 @@ import { AccountService } from '../service/account.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private accountService: AccountService) {}
+  public readonly userDataGroup: FormGroup;
+  loginError: boolean = false;
+
+  constructor(
+    private accountService: AccountService,
+    private readonly formBuilder: FormBuilder
+  ) {
+    this.userDataGroup = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {}
+
+  login() {
+    if (this.userDataGroup.invalid) {
+      this.loginError = true;
+      return;
+    } else {
+      this.loginError = false;
+    }
+
+    let user: UserHttpObj = {
+      user: {
+        username: this.userDataGroup.get('username').value,
+        password: this.userDataGroup.get('password').value,
+      },
+    };
+
+    this.accountService.login(user).then((response) => {
+      response.subscribe(
+        (userResp) => {
+          try {
+            if (userResp.user.username !== null) {
+              this.loginError = false;
+            } else {
+              this.loginError = true;
+            }
+          } catch (error) {
+            this.loginError = true;
+          }
+        },
+        (err) => {
+          this.loginError = true;
+        }
+      );
+    });
+  }
 }
