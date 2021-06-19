@@ -12,7 +12,10 @@ export class AccountRoutesConfig extends CommonRoutesConfig {
 			.route(`/account`)
 			.post((req: express.Request, res: express.Response) => {
 				account.checkUser(req, res);
-			})
+			});
+
+		this.app
+			.route(`/account/save`)
 			.post((req: express.Request, res: express.Response) => {
 				account.saveUser(req, res);
 			});

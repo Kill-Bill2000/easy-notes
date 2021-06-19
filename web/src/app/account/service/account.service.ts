@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from './interfaces/user';
 import { ConfigService } from '../../service/config/config.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -16,13 +17,38 @@ export class AccountService {
     });
   }
 
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+      );
+    }
+    // Return an observable with a user-facing error message.
+    return throwError('Something bad happened; please try again later.');
+  }
+
   //TODO implement
-  login(user: User): Observable<boolean> {
-    let url = this.SERVER_URL + '/account';
+  async login(user: User): Promise<boolean> {
+    let url: string = this.SERVER_URL + '/account';
+    let loggedInUser: boolean = false;
 
-    let loggedInUser = this.http.get<User>(url, JSON.stringify(user))
+    await this.http
+      .post<User>(url, user)
+      .pipe(catchError(this.handleError))
+      .subscribe((respUser: User) => {
+        if (respUser.password === user.password) {
+          return (loggedInUser = true);
+        } else {
+          return (loggedInUser = false);
+        }
+      });
 
-    return of(false);
+    return loggedInUser;
   }
 
   register(user: User) {}
