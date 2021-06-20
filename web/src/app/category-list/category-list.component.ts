@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { NotesService } from '../common/service/notes/notes.service';
 import { Category } from '../helpers/Category';
+import { CategoryHttpObj } from '../common/service/notes/model/categoryHttpObj';
 
 @Component({
   selector: 'app-category-list',
@@ -41,8 +42,15 @@ export class CategoryListComponent implements OnInit {
   }
 
   public addCategory(categoryName: string) {
-    // this.notesService.saveCategory(new Category(categoryName));
-    console.log(categoryName);
-    this.toggleField(false);
+    let newCategory: CategoryHttpObj = { title: categoryName };
+
+    this.notesService.getCategories().subscribe((catList) => {
+      catList.categories[0].categories.push(newCategory);
+
+      this.notesService.updateCategoryList(catList).subscribe(() => {
+        this.updateCategories();
+        this.toggleField(false);
+      });
+    });
   }
 }
