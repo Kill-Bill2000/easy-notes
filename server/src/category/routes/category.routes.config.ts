@@ -18,6 +18,9 @@ export class CategoryRoutesConfig extends CommonRoutesConfig {
 			.route(`/category`)
 			.post((req: express.Request, res: express.Response) => {
 				category.saveCategory(req, res);
+			})
+			.delete((req: express.Request, res: express.Response) => {
+				category.deleteCategory(req, res);
 			});
 
 		return this.app;

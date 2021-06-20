@@ -44,4 +44,24 @@ const saveCategory = (req: Request, res: Response) => {
 		});
 };
 
-export default { getAllCategories, saveCategory };
+const deleteCategory = (req: Request, res: Response) => {
+	const { username, password, categories } = req.body.user;
+
+	// return UserModel.findOneAndDelete(
+	// 	{ username, password },
+	// 	{ categories }
+	// )
+	// 	.then((result) => {
+	// 		return res.status(201).json({
+	// 			user: result,
+	// 		});
+	// 	})
+	// 	.catch((error) => {
+	// 		return res.status(500).json({
+	// 			message: error.message,
+	// 			error,
+	// 		});
+	// 	});
+};
+
+export default { getAllCategories, saveCategory, deleteCategory };
