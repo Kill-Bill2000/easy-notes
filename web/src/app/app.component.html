@@ -5,12 +5,15 @@
   </button>
   <span>Easy Notes</span>
   <span class="toolbar-spacer"></span>
+  <div *ngIf="isLoggedIn() || (storageChanges$ | async)">{{getUsername()}}</div>
   <button mat-icon-button class="icon" aria-label="Account" [matMenuTriggerFor]="account_menu">
     <mat-icon>account_circle</mat-icon>
   </button>
   <mat-menu #account_menu="matMenu">
-    <a mat-menu-item [routerLink]="['/login']">Login</a>
-    <a mat-menu-item [routerLink]="['/register']">Register</a>
+    <a mat-menu-item [routerLink]="['/login']" *ngIf="!isLoggedIn() || (storageChanges$ | async)">Login</a>
+    <a mat-menu-item [routerLink]="['/register']" *ngIf="!isLoggedIn() || (storageChanges$ | async)">Register</a>
+    <button mat-menu-item [routerLink]="['/login']" *ngIf="isLoggedIn() || (storageChanges$ | async)"
+      (click)="logout()">Logout</button>
   </mat-menu>
 </mat-toolbar>
 

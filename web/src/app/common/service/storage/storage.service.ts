@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 /**
  * From https://firstclassjs.com/persist-data-using-local-storage-and-angular/
@@ -9,6 +10,7 @@ import { Injectable } from '@angular/core';
 })
 export class StorageService {
   localStorage: Storage;
+  changes$ = new Subject();
 
   constructor() {
     this.localStorage = window.localStorage;
@@ -24,9 +26,30 @@ export class StorageService {
   set(key: string, value: any): boolean {
     if (this.isLocalStorageSupported) {
       this.localStorage.setItem(key, JSON.stringify(value));
+      this.changes$.next({
+        type: 'set',
+        key,
+        value,
+      });
       return true;
     }
     return false;
+  }
+
+  remove(key: string): boolean {
+    if (this.isLocalStorageSupported) {
+      this.localStorage.removeItem(key);
+      this.changes$.next({
+        type: 'remove',
+        key,
+      });
+      return true;
+    }
+    return false;
+  }
+
+  isLoggedIn(): boolean {
+    return this.getUsername() !== null;
   }
 
   setLogIn(username: string, password: string): boolean {
@@ -47,14 +70,6 @@ export class StorageService {
 
   removeLogin(): boolean {
     return this.remove('username') && this.remove('password');
-  }
-
-  remove(key: string): boolean {
-    if (this.isLocalStorageSupported) {
-      this.localStorage.removeItem(key);
-      return true;
-    }
-    return false;
   }
 
   get isLocalStorageSupported(): boolean {

@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
               this.loginError = false;
               this.storage.setLogIn(
                 userResp.user.username,
-                userResp.user.username
+                userResp.user.password
               );
             } else {
               this.loginError = true;
