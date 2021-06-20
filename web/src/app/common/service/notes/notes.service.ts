@@ -61,7 +61,17 @@ export class NotesService {
     categoryList.categories[0].categories[index] = updateCategory;
     user.user.categories = categoryList.categories[0].categories;
 
-    console.log(user);
+    return this.http
+      .post<CategoryListHttpObj>(url, user, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  public updateCategoryList(
+    categoryList: CategoryListHttpObj
+  ): Observable<CategoryListHttpObj> {
+    let url: string = this.SERVER_URL + '/category';
+    let user = this.userObj;
+    user.user.categories = categoryList.categories[0].categories;
 
     return this.http
       .post<CategoryListHttpObj>(url, user, httpOptions)

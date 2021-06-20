@@ -62,9 +62,30 @@ export class NoteCardComponent implements OnInit {
     this.refreshNotes();
   }
 
-  public deleteNote(note: Note) {
-    // this.notesService.deleteNote(note);
-    this.refreshNotes();
+  public deleteNote(deletedNote: NoteHttpObj) {
+    this.notesService.getCategories().subscribe((catList) => {
+      let indexCat = catList.categories[0].categories.findIndex(
+        (elem) => elem._id === this.category._id
+      );
+
+      if (indexCat < 0) {
+        return;
+      }
+
+      let index = catList.categories[0].categories[indexCat].notes.findIndex(
+        (elem) => elem._id === deletedNote._id
+      );
+
+      if (index < 0) {
+        return;
+      }
+
+      catList.categories[0].categories[indexCat].notes.splice(index, 1);
+
+      this.notesService
+        .updateCategoryList(catList)
+        .subscribe(() => this.refreshNotes());
+    });
   }
 
   public checkNote(checkedNote: NoteHttpObj) {
