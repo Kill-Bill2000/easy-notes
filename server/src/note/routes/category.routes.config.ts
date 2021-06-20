@@ -10,7 +10,7 @@ export class NotesRoutesConfig extends CommonRoutesConfig {
 	configureRoutes() {
 		this.app
 			.route(`/notes`)
-			.get((req: express.Request, res: express.Response) => {
+			.post((req: express.Request, res: express.Response) => {
 				note.getAllNotes(req, res);
 			});
 

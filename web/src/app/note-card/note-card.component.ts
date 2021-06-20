@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '../helpers/Category';
 import { Note } from '../helpers/Note';
 import { ActivatedRoute } from '@angular/router';
-import { NotesService } from './service/notes.service';
+import { NotesService } from '../common/service/notes/notes.service';
 
 @Component({
   selector: 'app-note-card',

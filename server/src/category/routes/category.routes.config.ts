@@ -10,7 +10,7 @@ export class CategoryRoutesConfig extends CommonRoutesConfig {
 	configureRoutes() {
 		this.app
 			.route(`/categories`)
-			.get((req: express.Request, res: express.Response) => {
+			.post((req: express.Request, res: express.Response) => {
 				category.getAllCategories(req, res);
 			});
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CookiesService } from '../common/service/cookies/cookies.service';
+import { NotesService } from '../common/service/notes/notes.service';
 import { Category } from '../helpers/Category';
-import { NotesService } from '../note-card/service/notes.service';
 
 @Component({
   selector: 'app-category-list',
@@ -13,10 +12,7 @@ export class CategoryListComponent implements OnInit {
   fieldShown = false;
   addButtonShown = true;
 
-  constructor(
-    private notesService: NotesService,
-    private cookiesService: CookiesService
-  ) {}
+  constructor(private notesService: NotesService) {}
 
   ngOnInit(): void {
     this.notesService
