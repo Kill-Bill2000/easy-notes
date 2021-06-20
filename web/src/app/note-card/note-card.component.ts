@@ -3,6 +3,8 @@ import { Category } from '../helpers/Category';
 import { Note } from '../helpers/Note';
 import { ActivatedRoute } from '@angular/router';
 import { NotesService } from '../common/service/notes/notes.service';
+import { NoteHttpObj } from '../common/service/notes/model/noteHttpObj';
+import { CategoryHttpObj } from '../common/service/notes/model/categoryHttpObj';
 
 @Component({
   selector: 'app-note-card',
@@ -10,11 +12,10 @@ import { NotesService } from '../common/service/notes/notes.service';
   styleUrls: ['./note-card.component.css'],
 })
 export class NoteCardComponent implements OnInit {
-  category: Category;
-  notes: Note[];
+  category: CategoryHttpObj;
   fieldShown = false;
   addButtonShown = true;
-  id: number;
+  id: string;
 
   constructor(
     private notesService: NotesService,
@@ -22,21 +23,22 @@ export class NoteCardComponent implements OnInit {
   ) {
     route.params.subscribe((val) => {
       this.route.paramMap.subscribe((params) => {
-        this.id = +params.get('id');
+        this.id = params.get('id');
       });
       this.refreshNotes();
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.refreshNotes();
+  }
 
   public refreshNotes() {
-    this.notesService
-      .getCategoryFromId(this.id)
-      .subscribe((cat) => (this.category = cat));
-    this.notesService
-      .getNotesOfCategory(this.category)
-      .subscribe((notes) => (this.notes = notes));
+    this.notesService.getCategories().subscribe((list) => {
+      this.category = list.categories[0].categories.find(
+        (cat: CategoryHttpObj) => cat._id === this.id
+      );
+    });
   }
 
   private toggleField(fieldVisible: boolean) {
@@ -54,14 +56,27 @@ export class NoteCardComponent implements OnInit {
   }
 
   public addNote(note: string) {
-    this.notesService.saveNote(new Note(note, this.category));
+    // this.notesService.saveNote({description: note, checked: false});
     console.log(note);
     this.toggleField(false);
     this.refreshNotes();
   }
 
   public deleteNote(note: Note) {
-    this.notesService.deleteNote(note);
+    // this.notesService.deleteNote(note);
     this.refreshNotes();
+  }
+
+  public checkNote(checkedNote: NoteHttpObj) {
+    let updatedCat = this.category;
+    updatedCat.notes.find((note) => {
+      return note._id === checkedNote._id;
+    }).checked = checkedNote.checked;
+
+    this.notesService.getCategories().subscribe((catList) => {
+      this.notesService
+        .updateCategory(updatedCat, catList)
+        .subscribe(() => this.refreshNotes());
+    });
   }
 }

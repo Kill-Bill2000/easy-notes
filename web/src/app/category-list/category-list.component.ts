@@ -41,7 +41,7 @@ export class CategoryListComponent implements OnInit {
   }
 
   public addCategory(categoryName: string) {
-    this.notesService.saveCategory(new Category(categoryName));
+    // this.notesService.saveCategory(new Category(categoryName));
     console.log(categoryName);
     this.toggleField(false);
   }

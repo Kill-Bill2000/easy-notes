@@ -1,7 +1,9 @@
 import { CategoryHttpObj } from './categoryHttpObj';
 export interface CategoryListHttpObj {
-  categories: {
-    _id: string;
-    categories: CategoryHttpObj[];
-  };
+  categories: CategoryElementHttpObj[];
+}
+
+export interface CategoryElementHttpObj {
+  _id: string;
+  categories: CategoryHttpObj[];
 }
