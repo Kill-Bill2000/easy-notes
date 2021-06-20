@@ -4,7 +4,7 @@ import { User } from './interfaces/user';
 import { Observable, of, Subscription, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ConfigService } from 'src/app/common/service/config/config.service';
-import { UserHttpObj } from './model/user';
+import { UserHttpObj } from './model/userHttpObj';
 import { HttpHeaders } from '@angular/common/http';
 import { httpOptions } from 'src/app/common/service/config/httpConfig';
 

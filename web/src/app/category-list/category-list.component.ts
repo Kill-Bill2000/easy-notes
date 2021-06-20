@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { NotesService } from '../common/service/notes/notes.service';
 import { Category } from '../helpers/Category';
 
@@ -8,16 +8,22 @@ import { Category } from '../helpers/Category';
   styleUrls: ['./category-list.component.css'],
 })
 export class CategoryListComponent implements OnInit {
-  categories: Category[];
+  categories: Category[] = [];
   fieldShown = false;
   addButtonShown = true;
 
   constructor(private notesService: NotesService) {}
 
-  ngOnInit(): void {
-    this.notesService
-      .getCategories()
-      .subscribe((categories) => (this.categories = categories));
+  ngOnInit(): void {}
+
+  public updateCategories() {
+    this.categories = [];
+
+    this.notesService.getCategories().subscribe((result) => {
+      for (const cat of result.categories[0].categories) {
+        this.categories.push(new Category(cat.title, +cat._id));
+      }
+    });
   }
 
   private toggleField(fieldVisible: boolean) {

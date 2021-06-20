@@ -1,31 +1,55 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { UserHttpObj } from 'src/app/account/service/model/userHttpObj';
 import { Category } from 'src/app/helpers/Category';
 import { Note } from 'src/app/helpers/Note';
+import { ConfigService } from '../config/config.service';
+import { httpOptions } from '../config/httpConfig';
+import { StorageService } from '../storage/storage.service';
+import { CategoryListHttpObj } from './model/categoryListHttpObj';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotesService {
-  constructor() {}
+  private SERVER_URL: string;
+  private userObj: UserHttpObj;
+
+  constructor(
+    private http: HttpClient,
+    private config: ConfigService,
+    private storage: StorageService
+  ) {
+    this.config.getConfig().subscribe((val) => {
+      this.SERVER_URL = val.serverURL;
+    });
+    this.setUserHttpObj();
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    return throwError(error);
+  }
+
+  private setUserHttpObj() {
+    this.userObj = {
+      user: {
+        username: this.storage.getUsername(),
+        password: this.storage.getPassword(),
+      },
+    };
+  }
 
   public saveCategory(cat: Category): Observable<boolean> {
     return of(true);
   }
 
-  public getCategories(): Observable<Category[]> {
-    let cats = new Array<Category>();
-    let cat1 = new Category('Category1');
-    cat1.id = 1;
-    cats.push(cat1);
-    let cat2 = new Category('Category2');
-    cat2.id = 2;
-    cats.push(cat2);
-    let cat3 = new Category('Category33');
-    cat3.id = 33;
-    cats.push(cat3);
-
-    return of(cats);
+  public getCategories(): Observable<CategoryListHttpObj> {
+    let url: string = this.SERVER_URL + '/categories';
+    return this.http
+      .post<CategoryListHttpObj>(url, this.userObj, httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   public getCategoryFromId(id: number): Observable<Category> {

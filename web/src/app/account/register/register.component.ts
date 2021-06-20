@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../service/account.service';
 import { StorageService } from 'src/app/common/service/storage/storage.service';
-import { UserHttpObj } from '../service/model/user';
+import { UserHttpObj } from '../service/model/userHttpObj';
 
 @Component({
   selector: 'app-register',

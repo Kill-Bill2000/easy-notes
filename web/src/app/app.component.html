@@ -1,5 +1,6 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button class="icon" aria-label="Menu" (click)="drawer.toggle(); closeShown=!closeShown">
+  <button mat-icon-button class="icon" aria-label="Menu"
+    (click)="drawer.toggle(); closeShown=!closeShown; loadCategories()">
     <mat-icon *ngIf="!closeShown">menu</mat-icon>
     <mat-icon *ngIf="closeShown">close</mat-icon>
   </button>

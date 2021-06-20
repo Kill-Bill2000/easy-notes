@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { AccountService } from '../service/account.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../service/interfaces/user';
-import { UserHttpObj } from '../service/model/user';
+import { UserHttpObj } from '../service/model/userHttpObj';
 import { StorageService } from '../../common/service/storage/storage.service';
 
 @Component({
