@@ -21,6 +21,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RegisterComponent } from './account/register/register.component';
 import { LoginComponent } from './account/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     AccountComponent,
     RegisterComponent,
     LoginComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,

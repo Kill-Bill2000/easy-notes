@@ -1,0 +1,25 @@
+<mat-card *ngIf="isLoggedIn()">
+    <mat-card-header>
+        <mat-card-title>
+            Hello {{getUsername()}}.
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        Create a category and add notes by using the toolbar on the left.
+    </mat-card-content>
+</mat-card>
+<mat-card *ngIf="!isLoggedIn()">
+    <mat-card-header>
+        <mat-card-title>
+            Welcome.
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        To use this application, please <br>
+        <a mat-stroked-button [routerLink]="['/login']">Login</a>
+        or
+        <a mat-stroked-button [routerLink]="['/register']">Register</a>
+        first
+    </mat-card-content>
+
+</mat-card>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../service/account.service';
 import { StorageService } from 'src/app/common/service/storage/storage.service';
@@ -20,7 +20,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private storage: StorageService,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.userDataGroup = this.formBuilder.group({
       username: ['', Validators.required],
@@ -68,6 +70,10 @@ export class RegisterComponent implements OnInit {
                 userResp.user.username,
                 userResp.user.password
               );
+
+              this.activatedRoute.params.subscribe((parameter) => {
+                this.router.navigate(['']);
+              });
             } else {
               this.loginError = true;
             }

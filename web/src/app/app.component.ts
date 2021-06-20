@@ -17,7 +17,15 @@ export class AppComponent implements AfterViewInit {
   @ViewChild(CategoryListComponent)
   private categoryListComponent!: CategoryListComponent;
 
-  constructor(private storage: StorageService) {}
+  constructor(private storage: StorageService) {
+    this.storageChanges$.subscribe((val: { type: string }) => {
+      if (val.type === 'set') {
+        this.loggedIn = true;
+      } else if (val.type === 'remove') {
+        this.loggedIn = false;
+      }
+    });
+  }
 
   ngAfterViewInit() {
     this.loggedIn = this.storage.isLoggedIn();
@@ -36,6 +44,8 @@ export class AppComponent implements AfterViewInit {
   }
 
   loadCategories() {
-    this.categoryListComponent.updateCategories();
+    if (this.isLoggedIn()) {
+      this.categoryListComponent.updateCategories();
+    }
   }
 }

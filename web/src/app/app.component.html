@@ -6,21 +6,26 @@
   </button>
   <span>Easy Notes</span>
   <span class="toolbar-spacer"></span>
-  <div *ngIf="isLoggedIn() || (storageChanges$ | async)">{{getUsername()}}</div>
+  <div *ngIf="loggedIn">{{getUsername()}}</div>
   <button mat-icon-button class="icon" aria-label="Account" [matMenuTriggerFor]="account_menu">
     <mat-icon>account_circle</mat-icon>
   </button>
   <mat-menu #account_menu="matMenu">
-    <a mat-menu-item [routerLink]="['/login']" *ngIf="!isLoggedIn() || (storageChanges$ | async)">Login</a>
-    <a mat-menu-item [routerLink]="['/register']" *ngIf="!isLoggedIn() || (storageChanges$ | async)">Register</a>
-    <button mat-menu-item [routerLink]="['/login']" *ngIf="isLoggedIn() || (storageChanges$ | async)"
-      (click)="logout()">Logout</button>
+    <a mat-menu-item [routerLink]="['/login']" *ngIf="!loggedIn">Login</a>
+    <a mat-menu-item [routerLink]="['/register']" *ngIf="!loggedIn">Register</a>
+    <button mat-menu-item [routerLink]="['/login']" *ngIf="loggedIn" (click)="logout()">Logout</button>
   </mat-menu>
 </mat-toolbar>
 
 <mat-drawer-container class="drawer-container" autosize>
   <mat-drawer #drawer mode="side" class="drawer">
-    <app-category-list></app-category-list>
+    <app-category-list *ngIf="loggedIn"></app-category-list>
+    <div *ngIf="!loggedIn">
+      Please
+      <a mat-stroked-button [routerLink]="['/login']">Login</a>
+      or
+      <a mat-stroked-button [routerLink]="['/register']">Register</a>
+    </div>
   </mat-drawer>
   <div class="sidenav-content">
     <router-outlet></router-outlet>

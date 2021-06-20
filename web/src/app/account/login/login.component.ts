@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../service/interfaces/user';
 import { UserHttpObj } from '../service/model/userHttpObj';
 import { StorageService } from '../../common/service/storage/storage.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private storage: StorageService,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.userDataGroup = this.formBuilder.group({
       username: ['', Validators.required],
@@ -58,6 +61,10 @@ export class LoginComponent implements OnInit {
                 userResp.user.username,
                 userResp.user.password
               );
+
+              this.activatedRoute.params.subscribe((parameter) => {
+                this.router.navigate(['']);
+              });
             } else {
               this.loginError = true;
             }
