@@ -5,6 +5,7 @@ import { AccountService } from '../service/account.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../service/interfaces/user';
 import { UserHttpObj } from '../service/model/user';
+import { StorageService } from '../../common/service/storage/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
+    private storage: StorageService,
     private readonly formBuilder: FormBuilder
   ) {
     this.userDataGroup = this.formBuilder.group({
@@ -48,6 +50,10 @@ export class LoginComponent implements OnInit {
           try {
             if (userResp.user.username !== null) {
               this.loginError = false;
+              this.storage.setLogIn(
+                userResp.user.username,
+                userResp.user.username
+              );
             } else {
               this.loginError = true;
             }
