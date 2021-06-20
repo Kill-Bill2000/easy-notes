@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'category/:id', component: NoteCardComponent },
   { path: 'login', component: AccountComponent, data: { type: 'login' } },
   { path: 'register', component: AccountComponent, data: { type: 'register' } },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
