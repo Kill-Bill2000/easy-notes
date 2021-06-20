@@ -1,5 +1,5 @@
 export interface NoteHttpObj {
-  _id: string;
+  _id?: string;
   description: string;
   checked: boolean;
 }

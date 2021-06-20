@@ -55,11 +55,25 @@ export class NoteCardComponent implements OnInit {
     this.toggleField(true);
   }
 
-  public addNote(note: string) {
-    // this.notesService.saveNote({description: note, checked: false});
-    console.log(note);
-    this.toggleField(false);
-    this.refreshNotes();
+  public addNote(description: string) {
+    let newNote: NoteHttpObj = { description: description, checked: false };
+
+    this.notesService.getCategories().subscribe((catList) => {
+      let indexCat = catList.categories[0].categories.findIndex(
+        (elem) => elem._id === this.category._id
+      );
+
+      if (indexCat < 0) {
+        return;
+      }
+
+      catList.categories[0].categories[indexCat].notes.push(newNote);
+
+      this.notesService.updateCategoryList(catList).subscribe(() => {
+        this.refreshNotes();
+        this.toggleField(false);
+      });
+    });
   }
 
   public deleteNote(deletedNote: NoteHttpObj) {
