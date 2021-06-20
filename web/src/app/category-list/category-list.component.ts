@@ -21,7 +21,7 @@ export class CategoryListComponent implements OnInit {
 
     this.notesService.getCategories().subscribe((result) => {
       for (const cat of result.categories[0].categories) {
-        this.categories.push(new Category(cat.title, +cat._id));
+        this.categories.push(new Category(cat.title, cat._id));
       }
     });
   }

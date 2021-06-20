@@ -53,23 +53,23 @@ export class NotesService {
   }
 
   public getCategoryFromId(id: number): Observable<Category> {
-    let cat: Category;
-    switch (id) {
-      case 1:
-        cat = new Category('Category1');
-        cat.id = 1;
-        return of(cat);
-      case 2:
-        cat = new Category('Category2');
-        cat.id = 2;
-        return of(cat);
-      case 33:
-        cat = new Category('Category33');
-        cat.id = 33;
-        return of(cat);
-      default:
-        return null;
-    }
+    // let cat: Category;
+    // switch (id) {
+    //   case 1:
+    //     cat = new Category('Category1');
+    //     cat.id = 1;
+    //     return of(cat);
+    //   case 2:
+    //     cat = new Category('Category2');
+    //     cat.id = 2;
+    //     return of(cat);
+    //   case 33:
+    //     cat = new Category('Category33');
+    //     cat.id = 33;
+    //     return of(cat);
+    //   default:
+    return null;
+    // }
   }
 
   public saveNote(note: Note): Observable<boolean> {
