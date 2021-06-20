@@ -15,6 +15,7 @@ import { StorageService } from '../../common/service/storage/storage.service';
 export class LoginComponent implements OnInit {
   public readonly userDataGroup: FormGroup;
   loginError: boolean = false;
+  errorMessage: string = 'Username or password invalid.';
 
   constructor(
     private accountService: AccountService,
@@ -30,6 +31,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
+    this.loginError = false;
+    this.errorMessage = 'Username or password invalid.';
+
     if (this.userDataGroup.invalid) {
       this.loginError = true;
       return;

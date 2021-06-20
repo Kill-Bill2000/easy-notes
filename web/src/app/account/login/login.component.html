@@ -14,7 +14,7 @@
             <mat-icon matSuffix>password</mat-icon>
         </mat-form-field>
         <div class="formResponse" *ngIf="loginError">
-            Username or password invalid.
+            {{errorMessage}}
         </div>
     </mat-card-content>
     <mat-card-actions class="buttons">

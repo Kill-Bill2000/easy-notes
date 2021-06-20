@@ -21,18 +21,7 @@ export class AccountService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    // if (error.status === 0) {
-    //   // A client-side or network error occurred. Handle it accordingly.
-    //   console.error('An error occurred:', error.error);
-    // } else {
-    //   // The backend returned an unsuccessful response code.
-    //   // The response body may contain clues as to what went wrong.
-    //   console.error(
-    //     `Backend returned code ${error.status}, ` + `body was: ${error.error}`
-    //   );
-    // }
-    // // Return an observable with a user-facing error message.
-    return throwError('Something bad happened; please try again later.');
+    return throwError(error);
   }
 
   async login(userObj: UserHttpObj): Promise<Observable<UserHttpObj>> {
@@ -43,5 +32,11 @@ export class AccountService {
       .pipe(catchError(this.handleError));
   }
 
-  register(user: User) {}
+  async register(userObj: UserHttpObj): Promise<Observable<UserHttpObj>> {
+    let url: string = this.SERVER_URL + '/account/save';
+
+    return this.http
+      .post<UserHttpObj>(url, userObj, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
 }
