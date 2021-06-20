@@ -9,7 +9,7 @@ import { CategoryHttpObj } from '../common/service/notes/model/categoryHttpObj';
   styleUrls: ['./category-list.component.css'],
 })
 export class CategoryListComponent implements OnInit {
-  categories: Category[] = [];
+  categories: CategoryHttpObj[] = [];
   fieldShown = false;
   addButtonShown = true;
 
@@ -22,7 +22,7 @@ export class CategoryListComponent implements OnInit {
 
     this.notesService.getCategories().subscribe((result) => {
       for (const cat of result.categories[0].categories) {
-        this.categories.push(new Category(cat.title, cat._id));
+        this.categories.push({ title: cat.title, _id: cat._id });
       }
     });
   }
@@ -51,6 +51,24 @@ export class CategoryListComponent implements OnInit {
         this.updateCategories();
         this.toggleField(false);
       });
+    });
+  }
+
+  public deleteCategory(deleteCat: CategoryHttpObj) {
+    this.notesService.getCategories().subscribe((catList) => {
+      let indexCat = catList.categories[0].categories.findIndex(
+        (elem) => elem._id === deleteCat._id
+      );
+
+      if (indexCat < 0) {
+        return;
+      }
+
+      catList.categories[0].categories.splice(indexCat, 1);
+
+      this.notesService
+        .updateCategoryList(catList)
+        .subscribe(() => this.updateCategories());
     });
   }
 }
